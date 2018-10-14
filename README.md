@@ -1,6 +1,6 @@
 # Fitting_Parameters_with_BTK
-# Contributors: ZCW  Date: 2018.10.14  Version: 1.0
-# How to use it.
+## Contributors: ZCW  Date: 2018.10.14  Version: 1.0
+## How to use it.
 The variable 'bounds' means the boundary of delta, gama, barrier height and spin polarization.
 
 Input file type must be .csv. 
