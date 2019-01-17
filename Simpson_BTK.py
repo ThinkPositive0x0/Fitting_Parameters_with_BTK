@@ -11,11 +11,11 @@ def calculate_parameters(E,Delta,Gama,Z,T):
     for number in range(len(E)):
         egama2 = pow(complex(E[number],-Gama),2)
         Delta2 = pow(Delta,2)
-        energy_complex = pow((egama2 - Delta2)/egama2,0.5)
+        energy_complex = pow((egama2 - Delta2)/egama2,0.5) 
         energy = energy_complex.real
         u02 = (0.5 * (1 + energy))            # coefficient of BCS u0^2
         v02 = (0.5 * (1 - energy))            # coefficient of BCS v0^2
-        gama2 = (u02 + Z**2*(u02 - v02)**2)
+        gama2 = (u02 + Z**2*(u02 - v02))**2
         if abs(complex(E[number],-Gama)) <= Delta:
             AN.append(Delta2/(egama2 + (Delta2 - egama2)*(1+2*Z**2)**2))
             AN[number] = AN[number].real
@@ -80,7 +80,6 @@ def BTK_Diff(parameters,V,T):
     E = split_E(a,n,h)
     AN,BN,BP,F_E= calculate_parameters(E,Delta,Gama,Z,T)
     I = integrate_I(V,E,AN,BN,BP,F_E,P,h,T)
-
     dI = []
     dV = []
     G = []
