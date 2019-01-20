@@ -36,7 +36,7 @@ void c_BTK_Diff(double E[], int NE, double V[], int NV,
         energy = creal(csqrt((egama2 - Delta2) / egama2));
         u02 = 0.5 * (1 + energy);
         v02 = 0.5 * (1 - energy);
-        gama2 = u02 + Z*Z*energy*energy;
+        gama2 = pow(u02 + Z*Z*energy, 2);
         if (cabs(e_gama) <= Delta) {
             AN[i] = creal(Delta2 / (egama2 + (Delta2 - egama2)*pow(1+2*Z*Z, 2)));
             BN[i] = 1 - AN[i];
@@ -70,8 +70,9 @@ void c_BTK_Diff(double E[], int NE, double V[], int NV,
 
     /* Differential */
     G[0] = 1;
+    double dInormal = II[NV-1] - II[NV-2];
     for (int i = 0; i < NV-1; ++i)
-        G[i+1] = (II[i+1]-II[i]) / (II[NV-1] - II[NV-2]);
+        G[i+1] = (II[i+1]-II[i]) / dInormal;
 
     free(AN);
     free(BN);
@@ -79,3 +80,5 @@ void c_BTK_Diff(double E[], int NE, double V[], int NV,
     free(F_E);
     free(II);
 }
+
+// Linux: gcc -Wall -shared -O3 -lm -o libSimpson_BTK.so Simpson_BTK.c
