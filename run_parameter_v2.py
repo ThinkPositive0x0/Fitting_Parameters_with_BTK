@@ -1,5 +1,4 @@
 import numpy as np
-from scipy.optimize import leastsq
 from scipy.optimize import fmin_slsqp
 from Simpson_BTK import BTK_Diff
 import pandas as pd
@@ -23,8 +22,8 @@ def errors(parameter,V,T,factor,G_experiment):
 			res = res + factor * (G[number] - G_experiment[number])**2
 		elif number < index_max_2 + 25 and number >index_max_2 -25:
 			res = res + factor * (G[number] - G_experiment[number])**2
-		elif number < index_min + 13 and number >index_min -13:
-			res = res + 3 * factor * (G[number] - G_experiment[number])**2
+		elif number < index_min + 11 and number >index_min -11:
+			res = res + 6 * factor * (G[number] - G_experiment[number])**2
 		else:
 			res = res + (G[number] - G_experiment[number])**2
 	return res
@@ -67,7 +66,7 @@ def run_parameter(filenames,Ts,bound):
 		myerror = []
 		myparameter = []
 
-		for i in range(10):
+		for i in range(13):
 			
 			r1 = fmin_slsqp(errors,parameter,args=(V,T,factor,G_experiment),iter = 100,bounds = bounds)
 			#r1 = parameter
@@ -77,13 +76,17 @@ def run_parameter(filenames,Ts,bound):
 			print('Gama:' + str(round(r1[1],4)))
 			print('Barrier Height:' + str(round(r1[2],4)))
 			print('Spin Polarization:' + str(round(r1[3],4)))
-			print(errors(r1,V,T,factor,G_experiment))
+			myerror.append(errors(r1,V,T,factor,G_experiment))
+			myparameter.append(r1)
+			print(myerror[i])
 			for j in range(4):
-				parameter[j] = r1[j] + random.uniform(-0.01*(10-i),0.01*(10-i))
-#				parameter[j] += random.uniform(-0.0003*(9-i)*(8-i)*(7-i),0.0003*(9-i)*(8-i)*(7-i))
+				parameter[j] = r1[j] + random.uniform(-0.1,0.1)
+				#parameter[j] = r1[j] + random.uniform(-0.013*(9-i),0.013*(9-i))
 				if parameter[j] < 0:
 					parameter[j] = 0
-		r1 = fmin_slsqp(errors,r1,args=(V,T,factor,G_experiment),iter = 100,bounds = bounds)
+		min_error_index = myerror.index(min(myerror))
+		r1 = fmin_slsqp(errors,myparameter[min_error_index],args=(V,T,factor,G_experiment),iter = 100,bounds = bounds)
+		print(errors(r1,V,T,factor,G_experiment))
 		Dataplot(r1,T,df2,'Vdc','G/GN',filename)
 
 if __name__ == "__main__":
