@@ -23,12 +23,12 @@ If previous code not working, please try:
 	
 	gcc -Wall -shared -fPIC -O3 -lm -std=c99 -o libSimpson_BTK.so Simpson_BTK.c
 	
-Note that working on linux system should do some change on file moudlea/Simpson_BTK.py
+Please note that working on a Linux system should make some changes to the file module/Simpson_BTK.py and recompile Simpson_BTK.c.
 
 	dllpath = curPath + "\\modules   
 	dllfile = curPath + "\\modules\\libSimpson_BTK.so"
 	
-	change to 
+	change into 
 	
 	dllpath = curPath + "/modules   
 	dllfile = curPath + "/modules/libSimpson_BTK.so"
