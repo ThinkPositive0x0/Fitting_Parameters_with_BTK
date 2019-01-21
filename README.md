@@ -22,4 +22,8 @@ Compile library code:
 If previous code not working, please try:
 	
 	gcc -Wall -shared -fPIC -O3 -lm -std=c99 -o libSimpson_BTK.so Simpson_BTK.c
+	
+Note that working on linux system should do some change on file moudle/Simpson_BTK.py
+
+
 
