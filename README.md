@@ -19,3 +19,7 @@ Compile library code:
 	
 	gcc -Wall -shared -O3 -lm -o libSimpson_BTK.so Simpson_BTK.c
 
+If previous code not working, please try:
+	
+	gcc -Wall -shared -fPIC -O3 -lm -std=c99 -o libSimpson_BTK.so Simpson_BTK.c
+
