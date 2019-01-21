@@ -1,5 +1,5 @@
 # Fitting_Parameters_with_BTK
-## Contributors: ThinkPositive0x0  Date: 2018.10.14  Version: 1.0
+## Contributors: ThinkPositive0x0  Tripodcat  Date: 2019.1.21  Version: 2.0
 ## How to use it.
 The variable 'bounds' means the boundary of delta, gama, barrier height and spin polarization.
 
