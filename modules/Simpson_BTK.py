@@ -7,8 +7,7 @@ import os
 
 
 # Main Function
-def BTK_Diff(parameters,V,T):
-    Delta, Gama, Z, P = parameters
+def BTK_Diff(V,T,Delta, Gama, Z, P):
     a= -25
     b= 25
     npanel= 2000
