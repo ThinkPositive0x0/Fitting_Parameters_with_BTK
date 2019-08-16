@@ -7,15 +7,18 @@ def Dataplot(parameter,T,df2,my_xaxis,my_yaxis,plot_name):
 	print("Using btk!")
 	V = df2['Vdc'].values
 	G= BTK_Diff(parameter,df2[my_xaxis],T)
-	G_min = min(G)
+	G_min = min(min(G),min(df2[my_yaxis]))
+	G_max = max(max(G),max(df2[my_yaxis]))
+	Internal = (G_max - G_min)/10
+	X_Position = max(df2[my_xaxis])/4
 	plt.plot(df2[my_xaxis],df2[my_yaxis],label = 'Exp')
 	plt.plot(df2[my_xaxis],G,label = 'G/GN Theory')
 
-	plt.text(2.2, 0.95, 'Temperature:'+str(round(T,4)), fontsize=10)
-	plt.text(2.2, 0.71+G_min/4, 'Delta:'+str(round(parameter[0],4)), fontsize=10)
-	plt.text(2.2, 0.47+2*G_min/4, 'Gama:'+str(round(parameter[1],4)), fontsize=10)
-	plt.text(2.2, 0.235+3*G_min/4, 'Barrier Height:'+str(round(parameter[2],4)), fontsize=10)
-	plt.text(2.2, G_min, 'Spin Polarization:'+str(round(parameter[3],4)), fontsize=10)
+	plt.text(X_Position, G_min + 4*Internal, 'Temperature:'+str(round(T,4)), fontsize=13)
+	plt.text(X_Position, G_min + 3*Internal, 'Delta:'+str(round(parameter[0],4)), fontsize=13)
+	plt.text(X_Position, G_min + 2*Internal, 'Gama:'+str(round(parameter[1],4)), fontsize=13)
+	plt.text(X_Position, G_min + 1*Internal, 'Barrier Height:'+str(round(parameter[2],4)), fontsize=13)
+	plt.text(X_Position, G_min + 0*Internal, 'Spin Polarization:'+str(round(parameter[3],4)), fontsize=13)
 	
 	plt.legend(loc = 1)
 	plt.axis('tight')

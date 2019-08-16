@@ -9,9 +9,9 @@ import os
 # Main Function
 def BTK_Diff(parameters,V,T):
     Delta, Gama, Z, P = parameters
-    a= -20
-    b= 20
-    npanel= 1000
+    a= -25
+    b= 25
+    npanel= 2000
     #print('Superconducting Gap:' + str(Delta))
     #print('Gama:' + str(Gama))
     #print('Barrier Height:' + str(Z))
@@ -37,7 +37,7 @@ def BTK_Diff(parameters,V,T):
     # Call wrapper to calculate
     curPath = os.getcwd()
     dllpath = curPath + "\\modules"
-    dllfile = curPath + "\\modules\\libSimpson_BTK.so"
+    dllfile = curPath + "\\modules\\libSimpson_BTK.dll"
     os.chdir(dllpath)
     wrapper = ctypes.CDLL(dllfile)
     os.chdir(curPath)

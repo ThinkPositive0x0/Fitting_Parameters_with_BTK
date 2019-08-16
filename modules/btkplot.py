@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import math
-from Simpson_BTK import BTK_Diff
+from modules.Simpson_BTK import BTK_Diff
 import pandas as pd
 def Dataplot(parameter,T,df2,my_xaxis,my_yaxis,plot_name):
 	
