@@ -1,4 +1,5 @@
 import numpy as np
+from scipy.optimize import minimize
 from scipy.optimize import leastsq
 from scipy.optimize import fmin_slsqp
 from Simpson_BTK import BTK_Diff
@@ -59,15 +60,19 @@ def run_parameter(filenames,Ts,bound):
 		''' 梯度下降 '''
 		# Weightness 
 		factor = 38
-		r1 = fmin_slsqp(errors,parameter,args=(V,T,factor,G_experiment),iter = 100,bounds = bounds)
-		#r1 = parameter
+
+		r1 = fmin_slsqp(errors,parameter,args=(V,T,factor,G_experiment), iter = 100,bounds = bounds)
+
+
 		print(errors(r1,V,T,factor,G_experiment))
 		time_end=time.time()
 		print('Parameters fitting totally cost : ',time_end-time_start)
 		Dataplot(r1,T,df2,'Vdc','G/GN',filename)
 
 if __name__ == "__main__":
-    filenames = ['Tunneling_junction_2.csv','Tunneling_junction_3.csv','Tunneling_junction_4.csv']
-    Ts = [1.63,1.65,1.65]
-    bound = [[(0.5,2),(0,2),(0,10),(0,0)],[(0.5,2),(0,2),(0,10),(0,0)],[(0.5,2),(0,2),(0,10),(0,0)]]
+
+    filenames = ['b2.csv', 't1.csv']
+    Ts = [1.6,1.7]
+    bound = [[(0.5,2),(0,2),(0,10),(0,1)],[(0.5,2),(0,2),(0,10),(0,1)]]
+
     run_parameter(filenames,Ts,bound)
