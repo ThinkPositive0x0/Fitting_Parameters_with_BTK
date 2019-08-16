@@ -4,6 +4,7 @@ import numpy as np
 from scipy.integrate import quad
 import ctypes
 
+
 # Main Function
 def BTK_Diff(parameters,V,T):
     Delta, Gama, Z, P = parameters
@@ -36,6 +37,7 @@ def BTK_Diff(parameters,V,T):
     wrapper = ctypes.CDLL("./libSimpson_BTK.so")
     wrapper.c_BTK_Diff(Ep, EN, Vp, VN, Tp, Deltap, Gamap, Zp, Pp, hp, Gp)
     G = [*Gp]
+
 
     #print(G)
     time_end=time.time()
